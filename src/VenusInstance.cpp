@@ -6,10 +6,24 @@
 #include <ThreadPoolSTD.hpp>
 #endif
 
-IThreadPool* CreateVenusInstance() {
+static IThreadPool* s_threadPool = nullptr;
+
+IThreadPool* GetVenusInstance() noexcept {
+	return s_threadPool;
+}
+
+void CreateVenusInstance(std::uint32_t threadCount) {
+	if (!s_threadPool)
 #ifdef VENUS_WIN32
-	return new ThreadPoolWin32();
+		s_threadPool = new ThreadPoolWin32(threadCount);
 #else
-	return new ThreadPoolSTD();
+		s_threadPool = new ThreadPoolSTD(threadCount);
 #endif
+}
+
+void CleanUpVenusInstance() noexcept {
+	if (s_threadPool) {
+		delete s_threadPool;
+		s_threadPool = nullptr;
+	}
 }

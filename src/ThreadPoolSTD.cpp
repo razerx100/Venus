@@ -1,13 +1,7 @@
 #include <ThreadPoolSTD.hpp>
 
-void ThreadPoolSTD::Create(std::uint32_t threadCount) noexcept {
+ThreadPoolSTD::ThreadPoolSTD(std::uint32_t threadCount) {}
 
-}
+ThreadPoolSTD::~ThreadPoolSTD() noexcept {}
 
-void ThreadPoolSTD::CleanUp() noexcept {
-
-}
-
-void ThreadPoolSTD::SubmitWork(void* workFunction) {
-
-}
+void ThreadPoolSTD::SubmitWork(void* workFunction) {}

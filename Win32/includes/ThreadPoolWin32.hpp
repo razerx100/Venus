@@ -5,8 +5,9 @@
 
 class ThreadPoolWin32 : public IThreadPool {
 public:
-	void Create(std::uint32_t threadCount) noexcept override;
-	void CleanUp() noexcept override;
+	ThreadPoolWin32(std::uint32_t threadCount);
+	~ThreadPoolWin32() noexcept;
+
 	void SubmitWork(void* workFunction) override;
 
 private:

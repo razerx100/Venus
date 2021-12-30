@@ -1,7 +1,9 @@
 #include <ThreadPoolWin32.hpp>
 #include <functional>
 
-void ThreadPoolWin32::Create(std::uint32_t threadCount) noexcept {
+ThreadPoolWin32::ThreadPoolWin32(std::uint32_t threadCount)
+	: m_threadPool(nullptr), m_cleanUpGroup(nullptr) {
+
 	InitializeThreadpoolEnvironment(&m_callbackEnv);
 	m_threadPool = CreateThreadpool(nullptr);
 
@@ -14,7 +16,7 @@ void ThreadPoolWin32::Create(std::uint32_t threadCount) noexcept {
 	SetThreadpoolCallbackCleanupGroup(&m_callbackEnv, m_cleanUpGroup, nullptr);
 }
 
-void ThreadPoolWin32::CleanUp() noexcept {
+ThreadPoolWin32::~ThreadPoolWin32() noexcept {
 	CloseThreadpoolCleanupGroupMembers(m_cleanUpGroup, FALSE, nullptr);
 	CloseThreadpoolCleanupGroup(m_cleanUpGroup);
 	CloseThreadpool(m_threadPool);
