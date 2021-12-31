@@ -33,7 +33,9 @@ void ThreadPoolWin32::WorkCallBack(
 	PVOID parameter,
 	PTP_WORK work
 ) {
-	std::function<void()>& callBack = *reinterpret_cast<std::function<void()>*>(parameter);
+	std::function<void()>* callBack = reinterpret_cast<std::function<void()>*>(parameter);
 
-	callBack();
+	(*callBack)();
+
+	delete callBack;
 }

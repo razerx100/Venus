@@ -12,6 +12,7 @@ class VENUS_DLL IThreadPool {
 public:
 	virtual ~IThreadPool() = default;
 
+	// SubmitWork will delete workFunction
 	virtual void SubmitWork(void* workFunction) = 0;
 };
 #endif
