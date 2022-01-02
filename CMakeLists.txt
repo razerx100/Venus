@@ -20,10 +20,6 @@ endif()
 
 file(GLOB_RECURSE SRC src/*.cpp includes/*.hpp exports/*.hpp)
 
-if(PLATFORM STREQUAL "WINDOWS")
-    file(GLOB_RECURSE SRCOPT Win32/*.hpp Win32/*.cpp)
-endif()
-
 add_library(${PROJECT_NAME} SHARED
     ${SRC} ${SRCOPT}
 )
@@ -32,19 +28,8 @@ target_include_directories(${PROJECT_NAME} PRIVATE includes/ exports/)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE "$<$<CONFIG:DEBUG>:_DEBUG>" "$<$<CONFIG:RELEASE>:NDEBUG>" BUILD_VENUS)
 
-if(PLATFORM STREQUAL "WINDOWS")
-    target_include_directories(${PROJECT_NAME} PRIVATE Win32/includes/)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE VENUS_WIN32)
-endif()
-
 if(MSVC)
-    string(REPLACE "/W3 " "/W4 " CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
-    string(REPLACE "/W3 " "/W4 " CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
-    string(REPLACE "/W3 " "/W4 " CMAKE_CXX_FLAGS_RELEASE ${CMAKE_CXX_FLAGS_RELEASE})
-endif()
-
-if(MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE /fp:fast /MP /EHa /Ot)
+    target_compile_options(${PROJECT_NAME} PRIVATE /fp:fast /MP /EHa /Ot /W4)
 endif()
 
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})

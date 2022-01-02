@@ -1,6 +1,6 @@
 #ifndef __I_THREAD_POOL_HPP__
 #define __I_THREAD_POOL_HPP__
-#include <cstdint>
+#include <functional>
 
 #ifdef BUILD_VENUS
 #define VENUS_DLL __declspec(dllexport)
@@ -12,7 +12,6 @@ class VENUS_DLL IThreadPool {
 public:
 	virtual ~IThreadPool() = default;
 
-	// SubmitWork will delete workFunction
-	virtual void SubmitWork(void* workFunction) = 0;
+	virtual void SubmitWork(std::function<void()> workFunction) noexcept = 0;
 };
 #endif
