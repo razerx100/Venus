@@ -9,10 +9,13 @@ public:
 	ThreadPool(std::uint32_t threadCount);
 	~ThreadPool() noexcept;
 
+	ThreadPool(const ThreadPool&) = delete;
+	ThreadPool& operator=(const ThreadPool&) = delete;
+
 	void SubmitWork(std::function<void()> workFunction) noexcept override;
 
 private:
-	void WorkThread() noexcept;
+	void WorkThread();
 
 private:
 	std::atomic_bool m_worksDone;

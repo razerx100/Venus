@@ -26,7 +26,7 @@ void ThreadPool::SubmitWork(std::function<void()> workFunction) noexcept {
 	m_cVar.notify_one();
 }
 
-void ThreadPool::WorkThread() noexcept {
+void ThreadPool::WorkThread() {
 	while (true) {
 		std::unique_lock<std::mutex> lock(m_mutex);
 		m_cVar.wait(lock, [&] { return !m_workQueue.empty() || m_worksDone; });
