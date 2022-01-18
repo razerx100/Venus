@@ -7,7 +7,7 @@ IThreadPool* GetVenusInstance() noexcept {
 	return s_threadPool;
 }
 
-void CreateVenusInstance(std::uint32_t threadCount) {
+void CreateVenusInstance(size_t threadCount) {
 	if (!s_threadPool)
 		s_threadPool = new ThreadPool(threadCount);
 }

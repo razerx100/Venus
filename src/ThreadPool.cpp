@@ -1,9 +1,9 @@
 #include <ThreadPool.hpp>
 
-ThreadPool::ThreadPool(std::uint32_t threadCount)
+ThreadPool::ThreadPool(size_t threadCount)
 	: m_worksDone(false), m_threadRunningCounter(0u), m_worksCount(0u) {
 
-	for (std::uint32_t index = 0u; index < threadCount; ++index)
+	for (size_t index = 0u; index < threadCount; ++index)
 		m_threads.emplace_back(&ThreadPool::WorkThread, this);
 }
 

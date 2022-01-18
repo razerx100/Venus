@@ -6,7 +6,7 @@
 
 class ThreadPool : public IThreadPool {
 public:
-	ThreadPool(std::uint32_t threadCount);
+	ThreadPool(size_t threadCount);
 	~ThreadPool() noexcept;
 
 	ThreadPool(const ThreadPool&) = delete;
@@ -19,8 +19,8 @@ private:
 
 private:
 	std::atomic_bool m_worksDone;
-	std::atomic_uint32_t m_threadRunningCounter;
-	std::atomic_uint32_t m_worksCount;
+	std::atomic_size_t m_threadRunningCounter;
+	std::atomic_size_t m_worksCount;
 	std::vector<std::thread> m_threads;
 	std::queue<std::function<void()>> m_workQueue;
 	std::mutex m_mutex;
