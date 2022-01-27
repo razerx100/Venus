@@ -21,7 +21,7 @@ endif()
 file(GLOB_RECURSE SRC src/*.cpp includes/*.hpp exports/*.hpp)
 
 add_library(${PROJECT_NAME} SHARED
-    ${SRC} ${SRCOPT}
+    ${SRC}
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE includes/ exports/)
