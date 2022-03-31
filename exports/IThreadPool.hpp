@@ -2,13 +2,7 @@
 #define __I_THREAD_POOL_HPP__
 #include <functional>
 
-#ifdef BUILD_VENUS
-#define VENUS_DLL __declspec(dllexport)
-#else
-#define VENUS_DLL __declspec(dllimport)
-#endif
-
-class VENUS_DLL IThreadPool {
+class IThreadPool {
 public:
 	virtual ~IThreadPool() = default;
 
