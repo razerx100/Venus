@@ -1,5 +1,5 @@
-#ifndef __THREAD_POOL_STANDARD_HPP__
-#define __THREAD_POOL_STANDARD_HPP__
+#ifndef THREAD_POOL_STANDARD_HPP_
+#define THREAD_POOL_STANDARD_HPP_
 #include <IThreadPool.hpp>
 #include <condition_variable>
 #include <queue>
@@ -7,7 +7,7 @@
 class ThreadPool : public IThreadPool {
 public:
 	ThreadPool(size_t threadCount);
-	~ThreadPool() noexcept;
+	~ThreadPool() noexcept override;
 
 	ThreadPool(const ThreadPool&) = delete;
 	ThreadPool& operator=(const ThreadPool&) = delete;
