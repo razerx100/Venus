@@ -4,7 +4,7 @@
 #include <condition_variable>
 #include <queue>
 
-class ThreadPool : public IThreadPool {
+class ThreadPool final : public IThreadPool {
 public:
 	ThreadPool(size_t threadCount);
 	~ThreadPool() noexcept override;
