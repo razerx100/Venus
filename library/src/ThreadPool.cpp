@@ -17,17 +17,6 @@ ThreadPool::~ThreadPool() noexcept
 		thread.join();
 }
 
-void ThreadPool::SubmitWork(std::function<void()> workFunction) noexcept
-{
-	{
-		std::lock_guard<std::mutex> lock(m_mutex);
-		m_workQueue.push(workFunction);
-		++m_worksCount;
-	}
-
-	m_cVar.notify_one();
-}
-
 void ThreadPool::WorkThread()
 {
 	while (true)
@@ -37,12 +26,12 @@ void ThreadPool::WorkThread()
 
 		if (!m_worksDone)
 		{
-			std::function<void()> work = m_workQueue.front();
+			std::shared_ptr<ITask> task = m_workQueue.front();
 			m_workQueue.pop();
 			lock.unlock();
 
 			++m_threadRunningCounter;
-			work();
+			task->RunTask();
 			--m_threadRunningCounter;
 			--m_worksCount;
 		}
