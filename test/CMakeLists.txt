@@ -6,9 +6,6 @@ add_executable(
     VenusTest ${SRC}
 )
 
-target_include_directories(VenusTest PRIVATE ${VENUS_PRIVATE_INCLUDES})
-unset(VENUS_PRIVATE_INCLUDES)
-
 if(MSVC)
     target_compile_options(VenusTest PRIVATE /fp:fast /MP /Ot /W4 /Gy)
 endif()

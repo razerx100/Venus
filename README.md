@@ -1,5 +1,5 @@
 # Venus
-Threadpool module implemented using C++ standard thread libraries. Meant to be used across multiple different modules.
+Threadpool module implemented using C++ standard thread libraries.
 
 ## Requirements
 cmake 3.21+.\
