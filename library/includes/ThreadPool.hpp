@@ -6,6 +6,7 @@
 #include <memory>
 #include <type_traits>
 #include <queue>
+#include <exception>
 
 class ThreadPool
 {
@@ -28,11 +29,27 @@ private:
 		{
 			if constexpr (std::is_same_v<T, void>)
 			{
-				m_taskFuntion();
-				m_promise.set_value();
+				try
+				{
+					m_taskFuntion();
+					m_promise.set_value();
+				}
+				catch (...)
+				{
+					m_promise.set_exception(std::current_exception());
+				}
 			}
 			else
-				m_promise.set_value(m_taskFuntion());
+			{
+				try
+				{
+					m_promise.set_value(m_taskFuntion());
+				}
+				catch (...)
+				{
+					m_promise.set_exception(std::current_exception());
+				}
+			}
 		}
 
 		[[nodiscard]]
