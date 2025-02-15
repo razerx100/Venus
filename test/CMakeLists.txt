@@ -7,7 +7,7 @@ add_executable(
 )
 
 if(MSVC)
-    target_compile_options(VenusTest PRIVATE /fp:fast /MP /Ot /W4 /Gy)
+    target_compile_options(VenusTest PRIVATE /fp:fast /MP /Ot /W4 /Gy /std:c++20 /Zc:__cplusplus)
 endif()
 
 include(FetchContent)

@@ -9,5 +9,5 @@ add_library(VenusLib STATIC
 target_include_directories(VenusLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/includes/)
 
 if(MSVC)
-    target_compile_options(VenusLib PRIVATE /fp:fast /MP /Ot /W4 /Gy)
+    target_compile_options(VenusLib PRIVATE /fp:fast /MP /Ot /W4 /Gy /std:c++20 /Zc:__cplusplus)
 endif()
